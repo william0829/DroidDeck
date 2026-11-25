@@ -812,6 +812,13 @@ jobs:
           grep -qi "CN=Android, OU=Android, O=Android" /tmp/sig.txt \
             || { echo "::error::apk is not signed with the AOSP testkey"; exit 1; }
 
+      - name: Package the four disguise variants (testkey)
+        run: |
+          set -euo pipefail
+          APK=$(find app/build/outputs/apk -name '*.apk' | head -1)
+          bash tools/release/package-variants-testkey.sh "$APK" app/build/outputs/variants 0.7.1
+          ls -l app/build/outputs/variants
+
       - uses: actions/upload-artifact@v4
         id: apk-upload
         with:
@@ -820,6 +827,14 @@ jobs:
           if-no-files-found: error
           retention-days: 30
           compression-level: 0
+          overwrite: true
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: droiddeck-variants
+          path: app/build/outputs/variants/*.apk
+          if-no-files-found: error
+          retention-days: 30
           overwrite: true
 
       - uses: actions/upload-artifact@v4
