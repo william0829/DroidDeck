@@ -206,10 +206,10 @@ pubg com.tencent.ig -pubg
             return {"tag_name": tag, "published_at": at, "assets": [{"name": a} for a in assets], **flags}
         releases = [
             release("gamescope-3.16.29-p5", "2026-10-01T18:53:08Z", "gamescope.tzst"),
-            release("0.3.0", "2026-09-30T00:00:00Z", "DroidDeck-0.3.0.apk", prerelease=True),
-            release("0.2.1", "2026-09-29T00:00:00Z", "DroidDeck-0.2.1.apk", draft=True),
-            release("0.2.0", "2026-09-28T03:20:01Z", "DroidDeck-0.2.0-pubg.apk", "DroidDeck-0.2.0.apk"),
-            release("0.1.6", "2026-09-01T00:00:00Z", "DroidDeck-0.1.6.apk"),
+            release("0.3.0", "2026-09-30T00:00:00Z", "DroidDeckWOW-0.3.0.apk", prerelease=True),
+            release("0.2.1", "2026-09-29T00:00:00Z", "DroidDeckWOW-0.2.1.apk", draft=True),
+            release("0.2.0", "2026-09-28T03:20:01Z", "DroidDeckWOW-0.2.0-pubg.apk", "DroidDeckWOW-0.2.0.apk"),
+            release("0.1.6", "2026-09-01T00:00:00Z", "DroidDeckWOW-0.1.6.apk"),
         ]
         self.assertEqual("0.2.0", stable_app_release(releases)["tag_name"])
         self.assertIsNone(stable_app_release(releases[:1]))
