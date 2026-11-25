@@ -49,6 +49,11 @@ while read -r name pkg suffix; do
 
   got=$("$AAPT" dump badging "$work/renamed.apk" | sed -n "s/^package: name='\([^']*\)'.*/\1/p")
   [ "$got" = "$pkg" ] || die "$name: apk says package '$got', not '$pkg'"
+  if [ "$pkg" != "$P" ]; then
+    tree=$("$AAPT" dump xmltree "$work/renamed.apk" AndroidManifest.xml)
+    grep -E 'android:(authorities|taskAffinity)' <<<"$tree" | grep -F "\"$P." \
+      && die "$name: manifest still names $P in an authority or task"
+  fi
 
   # Companion system-keys helper, if bundled: re-sign it with the testkey too.
   companion=assets/shortcuts.apk
