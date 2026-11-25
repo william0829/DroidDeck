@@ -839,6 +839,8 @@ def steam_running(proc="/proc"):
 def proton_env():
     env = dict(os.environ)
     env = GAME_DEBUG["apply_game_debug_logs"](env)
+    # Patched WoWBox FEX wow64 module reports x86/x64 to the Battle.net Agent only when this is on.
+    env["FEX_BNET_FORCE_X86"] = "1"
     if not steam_running():
         env.setdefault("PROTON_SPOOF_STEAMINPUT_VIDPID", "1")
     return env

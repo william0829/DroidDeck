@@ -28,6 +28,8 @@ object ComponentsManager {
     private const val TAG = "Components"
     private const val NIGHTLIES = "The412Banner/Nightlies"
     private const val DD_COMPONENTS = "Droid-Deck/DroidDeck-Components"
+    private const val CUSTOM_REPO = "william0829/DroidDeck"
+    private const val CUSTOM_TAG = "components-bnet-x86"
     internal const val DD_NIGHTLY = "linux-nightly"
     internal const val DD_BIONIC = "bionic-stable"
     private val RELEASES = linkedMapOf(
@@ -38,8 +40,8 @@ object ComponentsManager {
         "Vkd3d-proton-Linux" to "vkd3d",
     )
     private val NIGHTLY_PREFIXES = linkedMapOf("DD-dxvk-" to "dxvk", "DD-vkd3d-proton-" to "vkd3d", "DD-FEXCore-" to "fex")
-    private val SOURCES = RELEASES.keys.map { NIGHTLIES to it } + (DD_COMPONENTS to DD_NIGHTLY) + (DD_COMPONENTS to DD_BIONIC)
-    private val DOWNLOAD_REPOS = listOf(NIGHTLIES, DD_COMPONENTS)
+    private val SOURCES = RELEASES.keys.map { NIGHTLIES to it } + (DD_COMPONENTS to DD_NIGHTLY) + (DD_COMPONENTS to DD_BIONIC) + (CUSTOM_REPO to CUSTOM_TAG)
+    private val DOWNLOAD_REPOS = listOf(NIGHTLIES, DD_COMPONENTS, CUSTOM_REPO)
     private val TYPES = mapOf("FEXCore-Linux" to "fex", "FEXCore-Bionic" to "fex", "DXVK-Linux" to "dxvk", "VKD3D-Linux" to "vkd3d")
     private val TYPE_OF = mapOf("fex" to "FEXCore-Linux", "dxvk" to "DXVK-Linux", "vkd3d" to "VKD3D-Linux")
     val COMPONENTS = listOf("fex", "dxvk", "vkd3d")
@@ -1125,6 +1127,7 @@ object ComponentsManager {
     internal fun assetComp(release: String, name: String): String? = RELEASES[release] ?: when (release) {
         DD_NIGHTLY -> NIGHTLY_PREFIXES.entries.firstOrNull { name.startsWith(it.key) }?.value
         DD_BIONIC -> "fex"
+        CUSTOM_TAG -> "fex"
         else -> null
     }
 
