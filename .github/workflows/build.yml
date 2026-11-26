@@ -769,6 +769,7 @@ jobs:
         id: unit-tests
         env:
           DROIDDECK_BUILD_LABEL: ${{ steps.build-label.outputs.label }}
+          DROIDDECK_DEBUGGABLE: ${{ github.event.inputs.debuggable == 'true' && '1' || '0' }}
           SGDB_API_KEY: ${{ secrets.SGDB_API_KEY }}
         run: |
           set -o pipefail
