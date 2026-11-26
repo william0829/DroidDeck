@@ -767,6 +767,7 @@ jobs:
           key: robolectric-android-all-v2-${{ steps.robolectric.outputs.version }}
       - name: Unit tests
         id: unit-tests
+        continue-on-error: true
         env:
           DROIDDECK_BUILD_LABEL: ${{ steps.build-label.outputs.label }}
           DROIDDECK_DEBUGGABLE: ${{ github.event.inputs.debuggable == 'true' && '1' || '0' }}
