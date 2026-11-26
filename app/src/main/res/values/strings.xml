@@ -172,6 +172,8 @@
     <string name="fex_extreme_gn_detail">Performance with TSC and metadata hints. Try before Extreme.</string>
     <string name="fex_denuvo_label">Denuvo</string>
     <string name="fex_denuvo_detail">Performance with full code checks and the hypervisor bit hidden.</string>
+    <string name="fex_wowbox_label">WoWBox baseline</string>
+    <string name="fex_wowbox_detail">Full WoWBox p11 FEX group: TSO, BNet force-x86, NT IDs and cache/log tuning.</string>
     <string name="game_env_custom_value">Custom value</string>
     <string name="game_env_select_value">Select value</string>
     <string name="user_apps_section">Emulators &amp; apps</string>

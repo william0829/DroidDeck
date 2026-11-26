@@ -41,6 +41,34 @@ object GameEnvironmentOptions {
         Option("WINE_LARGE_ADDRESS_AWARE", "0", 0, Type.TOGGLE, listOf("0", "1")),
         Option("WINEDLLOVERRIDES", "", 0, Type.TEXT),
         Option("GALLIUM_HUD", "simple", 0, Type.MULTIPLE, listOf("simple", "fps", "frametime")),
+        // --- Baseline-aligned FEX group (WoWBox p11 profile) ---
+        Option("FEX_MAXINST", "5000", 0, Type.NUMBER),
+        Option("FEX_HOSTFEATURES", "off", 0, Type.CHOICE, listOf("off", "enablesve", "disablesve", "enableavx", "disableavx")),
+        Option("FEX_SMALLTSCSCALE", "1", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("FEX_SMC_CHECKS", "mtrack", 0, Type.CHOICE, listOf("none", "mtrack", "full")),
+        Option("FEX_VOLATILEMETADATA", "1", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("FEX_MONOHACKS", "1", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("FEX_HIDEHYPERVISORBIT", "0", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("FEX_BNET_DETECT_LOG", "0", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("FEX_DISABLEL2CACHE", "0", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("FEX_DYNAMICL1CACHE", "0", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("FEX_SILENTLOG", "1", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("FEX_OUTPUTLOG", "stderr", 0, Type.CHOICE, listOf("stderr", "stdout")),
+        Option("FEX_BNET_ID_NTQUERYSYSTEMINFORMATION", "0x9A", 0, Type.TEXT),
+        Option("FEX_BNET_ID_NTQUERYINFORMATIONPROCESS", "0x89", 0, Type.TEXT),
+        Option("FEX_BNET_ID_NTQUERYINFORMATIONTHREAD", "0x8A", 0, Type.TEXT),
+        // --- Graphics / driver / sync knobs ---
+        Option("TU_PVTMEM_MIN_FIBER", "4608", 0, Type.NUMBER),
+        Option("DXVK_FRAME_RATE", "30", 0, Type.NUMBER),
+        Option("WINE_FDSAN_LEVEL", "off", 0, Type.CHOICE, listOf("off", "warn", "error", "strict")),
+        Option("WINEESYNC", "0", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("WINEFSYNC", "0", 0, Type.TOGGLE, listOf("0", "1")),
+        Option("HODLL", "libwow64fex.dll", 0, Type.TEXT),
+        Option("DXVK_LOG_LEVEL", "info", 0, Type.CHOICE, listOf("none", "error", "warn", "info", "debug")),
+        Option("VKD3D_DEBUG", "warn", 0, Type.CHOICE, listOf("none", "error", "warn", "info", "debug")),
+        // --- Runtime injection hooks: extra command-line arguments ---
+        Option("DD_BNET_FLAGS", "", 0, Type.TEXT),
+        Option("DD_GAME_ARGS", "", 0, Type.TEXT),
     )
 
     fun find(name: String): Option? = all.firstOrNull { it.name == name }

@@ -199,6 +199,10 @@ android {
         release {
             minifyEnabled false
             signingConfig signingConfigs.testkey
+            // Debuggable test build: set DROIDDECK_DEBUGGABLE=1 in CI to enable run-as
+            // access to the private data dir (session.log / battlenet.log / spawned.log).
+            debuggable = providers.environmentVariable("DROIDDECK_DEBUGGABLE")
+                .map { it == "1" }.getOrElse(false)
         }
     }
 

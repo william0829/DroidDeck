@@ -24,6 +24,18 @@ object FexPreset {
             tso(0, 0, 0, 0) + listOf("FEX_X87REDUCEDPRECISION=1", "FEX_MULTIBLOCK=1", "FEX_SMALLTSCSCALE=1", "FEX_VOLATILEMETADATA=1")),
         Preset("DENUVO", R.string.fex_denuvo_label, R.string.fex_denuvo_detail,
             tso(0, 0, 0, 0) + listOf("FEX_X87REDUCEDPRECISION=1", "FEX_MULTIBLOCK=1", "FEX_SMCCHECKS=full", "FEX_HIDEHYPERVISORBIT=1")),
+        Preset("WOWBOX", R.string.fex_wowbox_label, R.string.fex_wowbox_detail,
+            tso(1, 0, 0, 1) + listOf(
+                "FEX_X87REDUCEDPRECISION=0", "FEX_MULTIBLOCK=1",
+                "FEX_MAXINST=5000", "FEX_HOSTFEATURES=off", "FEX_SMALLTSCSCALE=1",
+                "FEX_SMC_CHECKS=mtrack", "FEX_VOLATILEMETADATA=1", "FEX_MONOHACKS=1",
+                "FEX_HIDEHYPERVISORBIT=0", "FEX_DISABLEL2CACHE=0", "FEX_DYNAMICL1CACHE=0",
+                "FEX_BNET_FORCE_X86=1", "FEX_BNET_DETECT_LOG=0",
+                "FEX_BNET_ID_NTQUERYSYSTEMINFORMATION=0x9A",
+                "FEX_BNET_ID_NTQUERYINFORMATIONPROCESS=0x89",
+                "FEX_BNET_ID_NTQUERYINFORMATIONTHREAD=0x8A",
+                "FEX_SILENTLOG=1", "FEX_OUTPUTLOG=stderr",
+            )),
     )
 
     fun byId(id: String): Preset = all.firstOrNull { it.id == id } ?: all[0]

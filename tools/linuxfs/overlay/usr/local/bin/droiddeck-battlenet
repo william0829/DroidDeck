@@ -1038,6 +1038,14 @@ def proton_options():
     return options + (["--game-id", game] if game.isdigit() and game != "0" else [])
 
 
+def extra_args(var):
+    # Space-separated extra command-line arguments injected from the game env.
+    # Kept deliberately simple (no shell/quote expansion); flags like --disable-gpu
+    # and --enable-features=NetworkServiceInProcess2 split cleanly on whitespace.
+    raw = os.environ.get(var, "").strip()
+    return [part for part in raw.split() if part]
+
+
 def stop(processes, wait=STOP_WAIT):
     pids = [pid for pid, _ in processes]
     for sig in (signal.SIGTERM, signal.SIGKILL):
@@ -1271,7 +1279,7 @@ def open_client(root, reinstall=False):
             return 0
         verb = None if stop_leftovers(pfx) else "run"
     configure(root, LIBRARY)
-    status_code, seen = proton(launcher(root), verb=verb, watch=pfx)
+    status_code, seen = proton(launcher(root), args=extra_args("DD_BNET_FLAGS"), verb=verb, watch=pfx)
     say("Proton returned %d; Battle.net %s" % (status_code, "ran" if seen else "has not been seen yet"))
     if not (wait_while_open(pfx, grace=0 if seen else START_GRACE) or seen):
         say("Battle.net did not start (the launcher exited with %d)" % status_code)

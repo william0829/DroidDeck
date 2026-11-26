@@ -25,6 +25,10 @@ on:
         description: Rebuild preloads instead of reusing the approved binary snapshot
         type: boolean
         default: false
+      debuggable:
+        description: Build a debuggable test APK (run-as can read the private data dir for session logs)
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -706,6 +710,7 @@ jobs:
         id: build
         env:
           DROIDDECK_BUILD_LABEL: ${{ steps.build-label.outputs.label }}
+          DROIDDECK_DEBUGGABLE: ${{ github.event.inputs.debuggable == 'true' && '1' || '0' }}
           SGDB_API_KEY: ${{ secrets.SGDB_API_KEY }}
         run: |
           set -o pipefail
